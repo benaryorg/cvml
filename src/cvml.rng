@@ -1,16 +1,93 @@
-<grammar xmlns="http://relaxng.org/ns/structure/1.0">
+<grammar xmlns="http://relaxng.org/ns/structure/1.0" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
 	<start>
 		<element name="cv">
 			<element name="me">
-				<text/>
+				<element name="person">
+					<interleave>
+						<element name="name">
+							<zeroOrMore>
+								<element name="title">
+									<data type="string">
+										<param name="minLength">1</param>
+									</data>
+								</element>
+							</zeroOrMore>
+							<element name="firstname">
+								<ref name="name"/>
+							</element>
+							<zeroOrMore>
+								<element name="middlename">
+									<ref name="name"/>
+								</element>
+							</zeroOrMore>
+							<element name="lastname">
+								<ref name="name"/>
+							</element>
+						</element>
+						<element name="birthday">
+							<data type="date"/>
+						</element>
+						<element name="gender">
+							<optional>
+								<attribute name="transgender">
+									<data type="boolean"/>
+								</attribute>
+							</optional>
+							<choice>
+								<value>male</value>
+								<value>female</value>
+								<value>other</value>
+							</choice>
+						</element>
+					</interleave>
+				</element>
+				<element name="contact">
+					<interleave>
+						<zeroOrMore>
+							<element name="email">
+								<ref name="email"/>
+							</element>
+						</zeroOrMore>
+						<zeroOrMore>
+							<element name="phone">
+								<data type="string"/>
+							</element>
+						</zeroOrMore>
+						<zeroOrMore>
+							<element name="generic">
+								<ref name="protocol"/>
+							</element>
+						</zeroOrMore>
+						<zeroOrMore>
+							<element name="custom">
+								<attribute name="name">
+									<data type="string"/>
+								</attribute>
+								<data type="string"/>
+							</element>
+						</zeroOrMore>
+					</interleave>
+				</element>
 			</element>
-			<element name="life">
-				<text/>
-			</element>
-			<element name="abilities">
-				<text/>
-			</element>
+			<element name="life"><text/></element>
+			<element name="abilities"><text/></element>
 		</element>
 	</start>
+
+	<define name="name">
+		<data type="string">
+			<param name="pattern">[^ ]+</param>
+		</data>
+	</define>
+	<define name="email">
+		<data type="string">
+			<param name="pattern">.+@.+</param>
+		</data>
+	</define>
+	<define name="protocol">
+		<data type="string">
+			<param name="pattern">[a-zA-Z0-9+.-]+:(//([^/@:]+(:[^/@:]+)?@)?([^/]+))?((/[^/?]+)*/?).+</param>
+		</data>
+	</define>
 </grammar>
 
