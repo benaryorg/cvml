@@ -1,0 +1,16 @@
+<grammar xmlns="http://relaxng.org/ns/structure/1.0">
+	<start>
+		<element name="cv">
+			<element name="me">
+				<text/>
+			</element>
+			<element name="life">
+				<text/>
+			</element>
+			<element name="abilities">
+				<text/>
+			</element>
+		</element>
+	</start>
+</grammar>
+
