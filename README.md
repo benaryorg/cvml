@@ -23,5 +23,7 @@ You can also transpile RNG to XSD if you really want to.
 	- [ ] CV generator
 	- [ ] CV editor
 
+# License
 
+CVML is licensed under the MIT license for easy and liberal usage.
 
