@@ -9,6 +9,14 @@ Using CVML is pretty simple, with this repository a schema file (RELAX NG) is
 published that you can easily use to validate files against using tools like
 `xmllint`.
 
+To check for validity of a file using `xmllint` use the following command (this
+command actually works when used in the root of this repository):
+
+```bash
+xmllint --noout --relaxng src/cvml.rng tests/pass/example.xml
+# change to your own file:             ~~~~~~~~~~~~~~~~~~~~~~
+```
+
 # Why not XSD?
 
 XSD is huge and complicated, that is the reason why e.g. `xmllint` supports RNG
