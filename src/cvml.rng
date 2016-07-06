@@ -11,24 +11,7 @@
 						<!-- a name consists of optional titles, first and lastname and optional
 							 middlenames -->
 						<element name="name">
-							<zeroOrMore>
-								<element name="title">
-									<data type="string">
-										<param name="minLength">1</param>
-									</data>
-								</element>
-							</zeroOrMore>
-							<element name="firstname">
-								<ref name="name"/>
-							</element>
-							<zeroOrMore>
-								<element name="middlename">
-									<ref name="name"/>
-								</element>
-							</zeroOrMore>
-							<element name="lastname">
-								<ref name="name"/>
-							</element>
+							<ref name="name"/>
 						</element>
 						<!-- the date of birth -->
 						<element name="birthday">
@@ -90,11 +73,32 @@
 		</element>
 	</start>
 
-	<!-- a name may not be empty -->
+	<!-- a complex name -->
 	<define name="name">
-		<data type="string">
-			<param name="pattern">[^ ]+</param>
-		</data>
+		<zeroOrMore>
+			<element name="title">
+				<data type="string">
+					<param name="minLength">1</param>
+				</data>
+			</element>
+		</zeroOrMore>
+		<element name="firstname">
+			<data type="string">
+				<param name="minLength">1</param>
+			</data>
+		</element>
+		<zeroOrMore>
+			<element name="middlename">
+				<data type="string">
+					<param name="minLength">1</param>
+				</data>
+			</element>
+		</zeroOrMore>
+		<element name="lastname">
+			<data type="string">
+				<param name="minLength">1</param>
+			</data>
+		</element>
 	</define>
 	<!-- simplified email, it must contain an "@" and something before and after it -->
 	<define name="email">
