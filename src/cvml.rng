@@ -8,8 +8,7 @@
 				<!-- personal information like name, age, gender and the like -->
 				<element name="person">
 					<interleave>
-						<!-- a name consists of optional titles, first and lastname and optional
-							 middlenames -->
+						<!-- a complex name -->
 						<element name="name">
 							<ref name="name"/>
 						</element>
@@ -73,7 +72,7 @@
 		</element>
 	</start>
 
-	<!-- a complex name -->
+	<!-- a name consists of optional titles, first and lastname and optional middlenames -->
 	<define name="name">
 		<zeroOrMore>
 			<element name="title">
