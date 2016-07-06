@@ -1,10 +1,15 @@
 <?xml version="1.0"?>
 <grammar xmlns="http://relaxng.org/ns/structure/1.0" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
 	<start>
+		<!-- the root element is named "cv" -->
 		<element name="cv">
+			<!-- "me" contains personal and contact information -->
 			<element name="me">
+				<!-- personal information like name, age, gender and the like -->
 				<element name="person">
 					<interleave>
+						<!-- a name consists of optional titles, first and lastname and optional
+							 middlenames -->
 						<element name="name">
 							<zeroOrMore>
 								<element name="title">
@@ -25,9 +30,12 @@
 								<ref name="name"/>
 							</element>
 						</element>
+						<!-- the date of birth -->
 						<element name="birthday">
 							<data type="date"/>
 						</element>
+						<!-- gender; male, female or other with an optional attribute whether it's
+							 transgender or not -->
 						<element name="gender">
 							<optional>
 								<attribute name="transgender">
@@ -42,6 +50,7 @@
 						</element>
 					</interleave>
 				</element>
+				<!-- contact information -->
 				<element name="contact">
 					<interleave>
 						<zeroOrMore>
@@ -55,11 +64,14 @@
 							</element>
 						</zeroOrMore>
 						<zeroOrMore>
+							<!-- generic is a simplified URI, just type in whatever it is followed
+								 by a colon and the address, username/password as well as server are optional -->
 							<element name="generic">
 								<ref name="protocol"/>
 							</element>
 						</zeroOrMore>
 						<zeroOrMore>
+							<!-- in case you can't put it into "generic" -->
 							<element name="custom">
 								<attribute name="name">
 									<data type="string"/>
@@ -70,21 +82,27 @@
 					</interleave>
 				</element>
 			</element>
+			<!-- "life" is a list of all events that happened in your life as birth, graduations,
+				 jobs, projects and whatever you want to put in there -->
 			<element name="life"><text/></element>
+			<!-- "abilities" lists skills you have gained -->
 			<element name="abilities"><text/></element>
 		</element>
 	</start>
 
+	<!-- a name may not be empty -->
 	<define name="name">
 		<data type="string">
 			<param name="pattern">[^ ]+</param>
 		</data>
 	</define>
+	<!-- simplified email, it must contain an "@" and something before and after it -->
 	<define name="email">
 		<data type="string">
 			<param name="pattern">.+@.+</param>
 		</data>
 	</define>
+	<!-- simplified uri for use with everything -->
 	<define name="protocol">
 		<data type="string">
 			<param name="pattern">[a-zA-Z0-9+.-]+:(//([^/@:]+(:[^/@:]+)?@)?([^/]+))?((/[^/?]+)*/?).+</param>
