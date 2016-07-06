@@ -66,7 +66,26 @@
 			</element>
 			<!-- "life" is a list of all events that happened in your life as birth, graduations,
 				 jobs, projects and whatever you want to put in there -->
-			<element name="life"><text/></element>
+			<element name="life">
+				<interleave>
+					<!-- some information are taken from "me" -->
+					<element name="birth">
+						<element name="place">
+							<ref name="place"/>
+						</element>
+						<optional>
+							<element name="birthname">
+								<ref name="name"/>
+							</element>
+						</optional>
+						<zeroOrMore>
+							<element name="parent">
+								<ref name="name"/>
+							</element>
+						</zeroOrMore>
+					</element>
+				</interleave>
+			</element>
 			<!-- "abilities" lists skills you have gained -->
 			<element name="abilities"><text/></element>
 		</element>
@@ -99,17 +118,62 @@
 			</data>
 		</element>
 	</define>
+
 	<!-- simplified email, it must contain an "@" and something before and after it -->
 	<define name="email">
 		<data type="string">
 			<param name="pattern">.+@.+</param>
 		</data>
 	</define>
+
 	<!-- simplified uri for use with everything -->
 	<define name="protocol">
 		<data type="string">
 			<param name="pattern">[a-zA-Z0-9+.-]+:(//([^/@:]+(:[^/@:]+)?@)?([^/]+))?((/[^/?]+)*/?).+</param>
 		</data>
+	</define>
+
+	<!-- a place, can be an exact address, a city or just a country -->
+	<define name="place">
+		<!-- the country is provided as two letter ISO 3166-1 alpha-2 code -->
+		<element name="country">
+			<data type="string">
+				<param name="pattern">[a-z]{2}</param>
+			</data>
+		</element>
+		<optional>
+			<!-- optional region, free text -->
+			<optional>
+				<element name="region">
+					<data type="string">
+						<param name="minLength">1</param>
+					</data>
+				</element>
+			</optional>
+			<optional>
+				<element name="city">
+					<optional>
+						<element name="postal">
+							<data type="string">
+								<param name="minLength">1</param>
+							</data>
+						</element>
+					</optional>
+					<element name="name">
+						<data type="string">
+							<param name="minLength">1</param>
+						</data>
+					</element>
+				</element>
+				<optional>
+					<element name="address">
+						<data type="string">
+							<param name="minLength">1</param>
+						</data>
+					</element>
+				</optional>
+			</optional>
+		</optional>
 	</define>
 </grammar>
 

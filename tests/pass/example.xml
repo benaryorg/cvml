@@ -29,6 +29,34 @@
 		</contact>
 	</me>
 	<life>
+		<birth>
+			<place>
+				<country>at</country>
+				<region>Tyrol</region>
+				<city>
+					<postal>6020</postal>
+					<name>Innsbruck</name>
+				</city>
+				<address>Madeup Street 1</address>
+			</place>
+			<birthname>
+				<title>King</title>
+
+				<firstname>Julien</firstname>
+				<middlename>The Great</middlename>
+				<lastname>Lemur</lastname>
+			</birthname>
+
+			<parent>
+				<firstname>Some</firstname>
+				<lastname>One</lastname>
+			</parent>
+			<parent>
+				<firstname>Some</firstname>
+				<middlename>One</middlename>
+				<lastname>Else</lastname>
+			</parent>
+		</birth>
 	</life>
 	<abilities>
 	</abilities>
